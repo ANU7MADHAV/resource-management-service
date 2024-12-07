@@ -6,6 +6,13 @@ import (
 
 func (app *application) routes() *gin.Engine {
 	r := gin.Default()
-	r.GET("/healthcheck", app.healthCheck)
+	v1 := r.Group("/api/v1")
+	{
+		v1.GET("/healthcheck", app.healthCheck)
+
+		v1.POST("/users/register", app.register)
+		v1.POST("/users/login", app.login)
+	}
+
 	return r
 }
